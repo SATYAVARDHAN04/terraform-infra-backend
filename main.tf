@@ -38,7 +38,7 @@ resource "terraform_data" "main" {
   }
 
   provisioner "file" {
-    source      = "main.sh"      # Local file/directory to copy
+    source      = "main.sh"                  # Local file/directory to copy
     destination = "/tmp/${var.component}.sh" # Remote path to place file/content
   }
 
@@ -168,7 +168,7 @@ resource "aws_autoscaling_policy" "main" {
 
 resource "aws_lb_listener_rule" "main" {
   listener_arn = local.alb_listerner_arn
-  priority     = 10
+  priority     = var.priority
 
   action {
     type             = "forward"
@@ -177,7 +177,7 @@ resource "aws_lb_listener_rule" "main" {
 
   condition {
     host_header {
-      values = ["${var.component}.backend-${var.environment}.${var.zone_name}"]
+      values = [local.rule_header_url]
     }
   }
 }

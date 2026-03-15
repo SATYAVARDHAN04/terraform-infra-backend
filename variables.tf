@@ -34,3 +34,7 @@ variable "common_tags" {
 variable "component" {
   type = string
 }
+
+variable "priority" {
+
+}
