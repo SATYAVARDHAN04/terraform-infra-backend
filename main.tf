@@ -92,6 +92,9 @@ resource "aws_launch_template" "main" {
   instance_initiated_shutdown_behavior = "terminate"
   instance_type                        = "t3.micro"
   vpc_security_group_ids               = [local.sg_id]
+  iam_instance_profile {
+    name = "EC2FETCHSSMPARAM"
+  }
   update_default_version               = true # each time we update new version will be default
   tag_specifications {
     resource_type = "instance"
